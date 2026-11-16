@@ -24,7 +24,9 @@ nextflow_pipeline {
                 { assert workflow.success},
                 { assert statsFiles.size() > 0 },
                 { statsFiles.each { f ->
-                    def stats = new groovy.json.JsonSlurper().parse(f.toFile())
+                    // getAllFilesFromDir returns java.io.File, which
+                    // JsonSlurper.parse accepts directly
+                    def stats = new groovy.json.JsonSlurper().parse(f)
                     assert stats.num_rows > 0
                     assert stats.num_columns > 0
                     assert stats.compartment_columns instanceof Map
