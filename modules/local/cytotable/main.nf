@@ -86,6 +86,12 @@ if drop_columns:
 
 pq.write_table(table, "${meta.batch}_${meta.plate}.parquet", compression="snappy")
 
+# Remove CytoTable's intermediate output: the "*.parquet" output glob
+# below would otherwise pick up both this intermediate and the final
+# renamed profile, and downstream processes (which expect a single
+# profile per plate) would receive a list of two files instead.
+os.remove("temp_output.parquet")
+
 # QC stats: structural summary of the joined profile, grouped by measurement
 # source so downstream users can sanity-check that every compartment/metadata
 # group is present and non-empty without opening the (potentially large)
