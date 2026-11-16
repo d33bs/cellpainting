@@ -25,39 +25,7 @@ process CYTOTABLE_REPORTS {
     task.ext.when == null || task.ext.when
 
     script:
-    def prefix          = task.ext.prefix ?: "${meta.batch}_${meta.plate}"
-    def n_head_rows     = task.ext.n_head_rows ?: 10
-    def export_ipynb    = task.ext.export_ipynb ?: false
-    def export_markdown = task.ext.export_markdown ?: false
-    def args            = task.ext.args ?: ''
-    """
-    # matplotlib/marimo default to writing config under \$HOME (e.g.
-    # /.config/matplotlib). nf-core CI containers run as a non-root UID with
-    # an unwritable \$HOME, which fails with "Permission denied: '/.config'"
-    # even though the export otherwise succeeds. Point both at the task's
-    # own (always-writable) work directory instead.
-    export HOME="\$PWD"
-    export MPLCONFIGDIR="\$PWD/.matplotlib"
-
-    cp ${moduleDir}/parquet_reports.py ${prefix}_reports.py
-
-    # Export to HTML (marimo export executes the report code)
-    marimo export html ${prefix}_reports.py \\
-        -o ${prefix}_reports.html \\
-        -- \\
-        --parquet-file ${parquet_file} \\
-        --n-head-rows ${n_head_rows} \\
-        --output-prefix ${prefix} \\
-        ${args}
-
-    # Optionally also export notebook and markdown forms
-    if [ "${export_ipynb}" = "true" ]; then
-        marimo export ipynb ${prefix}_reports.py -o ${prefix}_reports.ipynb || echo "Warning: ipynb export failed"
-    fi
-    if [ "${export_markdown}" = "true" ]; then
-        marimo export md ${prefix}_reports.py -o ${prefix}_reports.md || echo "Warning: markdown export failed"
-    fi
-    """
+    template 'cytotable_reports.sh'
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.batch}_${meta.plate}"

@@ -1,3 +1,24 @@
+#!/usr/bin/env bash
+# matplotlib/marimo default to writing config under \$HOME (e.g.
+# /.config/matplotlib). nf-core CI containers run as a non-root UID with
+# an unwritable \$HOME, which fails with "Permission denied: '/.config'"
+# even though the export otherwise succeeds. Point both at the task's
+# own (always-writable) work directory instead.
+export HOME="\$PWD"
+export MPLCONFIGDIR="\$PWD/.matplotlib"
+
+# Values from the module config are resolved from the process context
+# (task.ext, meta) at launch time; script-block locals are not visible
+# inside templates.
+prefix="${task.ext.prefix ?: meta.batch + '_' + meta.plate}"
+n_head_rows="${task.ext.n_head_rows ?: 10}"
+
+# The marimo report app is written into the task work directory below so
+# the module is fully self-contained: nothing from the module directory
+# (which may be unavailable on remote runner nodes, e.g. AWS Batch with
+# Wave/Fusion) is needed at run time. See
+# https://nf-co.re/docs/specifications/components/modules/general#script-inclusion
+cat > \${prefix}_reports.py <<'PYEOF'
 import marimo
 
 __generated_with = "0.9.0"
@@ -114,7 +135,7 @@ def _(df, json, output_prefix, parquet_file):
     metadata_json_path = f"{output_prefix}_metadata.json"
     with open(metadata_json_path, "w") as f:
         json.dump(metadata, f, indent=2)
-        f.write("\n")
+        f.write("\\n")
     print(f"Saved metadata JSON to: {metadata_json_path}")
     return (metadata,)
 
@@ -245,3 +266,21 @@ def _(df, pd):
 
 if __name__ == "__main__":
     app.run()
+PYEOF
+
+# Export to HTML (marimo export executes the report code)
+marimo export html \${prefix}_reports.py \\
+    -o \${prefix}_reports.html \\
+    -- \\
+    --parquet-file ${parquet_file} \\
+    --n-head-rows \${n_head_rows} \\
+    --output-prefix \${prefix} \\
+    ${task.ext.args ?: ''}
+
+# Optionally also export notebook and markdown forms
+if [ "${task.ext.export_ipynb ?: false}" = "true" ]; then
+    marimo export ipynb \${prefix}_reports.py -o \${prefix}_reports.ipynb || echo "Warning: ipynb export failed"
+fi
+if [ "${task.ext.export_markdown ?: false}" = "true" ]; then
+    marimo export md \${prefix}_reports.py -o \${prefix}_reports.md || echo "Warning: markdown export failed"
+fi

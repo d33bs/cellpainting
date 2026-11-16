@@ -3,7 +3,8 @@
 Consolidated reports for CytoTable parquet outputs: a JSON metadata report, a
 descriptive-statistics parquet, distribution plots, and a rendered HTML report
 (optionally also ipynb / markdown exports). Everything is produced by one
-marimo app (`parquet_reports.py`) executed via `marimo export html`.
+marimo app rendered from the module template
+(`templates/cytotable_reports.sh`) and executed via `marimo export html`.
 
 The two report flavours (metadata + descriptive statistics) started life as two
 separate processes in #49 and were consolidated into a single process so the
