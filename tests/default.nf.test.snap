@@ -11,8 +11,17 @@
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
                     "cellprofiler": "4.2.8"
                 },
+                "CYTOTABLE": {
+                    "cytotable": "1.3.0"
+                },
+                "CYTOTABLE_REPORTS": {
+                    "marimo": "0.25.2"
+                },
                 "IMAGEMAGICK_MONTAGE": {
                     "imagemagick": "7.1.2-21"
+                },
+                "PYCYTOMINER_ANNO": {
+                    "pycytominer": "1.7.1"
                 },
                 "Workflow": {
                     "nf-core/cellpainting": "v1.0.0dev"
@@ -42,6 +51,13 @@
                 "BR00117035_IllumER.npy:md5,75062bcc5f10eb9db2ee9e18b9fc4d40",
                 "BR00117035_IllumMito.npy:md5,d33a48d56045736f46a470f44955ff07",
                 "BR00117035_IllumRNA.npy:md5,c21cb042cfb15cc7ca939eef99d4ebd3",
+                "2021_04_26_Batch1_BR00117035_stats.json:md5,e93ef81b3915a8c5daeaeee86f8c467d",
+                "2021_04_26_Batch1_BR00117035_descriptive_stats.parquet:md5,69060f205b63fae9ec51aca5e215aae8",
+                "2021_04_26_Batch1_BR00117035_dna_intensity.png:md5,e3daa0545fba018053828c9fa7c4e796",
+                "2021_04_26_Batch1_BR00117035_metadata.json:md5,fa050e05e8729648dd4e60d9769592e9",
+                "2021_04_26_Batch1_BR00117035_reports.html:md5,34b92759823fd5f246b8498cf8035232",
+                "2021_04_26_Batch1_BR00117035_reports.py:md5,b9e8c560032899f37cf6131f10c96cca",
+                "2021_04_26_Batch1_BR00117035_size_distributions.png:md5,7440bf54d02fb452137dfe9b9aeaa3b0",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ],
             [
@@ -124,6 +140,14 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_stats.json",
+                "cytotable/reports",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_descriptive_stats.parquet",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_dna_intensity.png",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_metadata.json",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_reports.html",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_reports.py",
+                "cytotable/reports/2021_04_26_Batch1_BR00117035_size_distributions.png",
                 "imagemagick",
                 "imagemagick/montage",
                 "imagemagick/montage/full",
@@ -142,13 +166,15 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
                 "plateviewer",
-                "plateviewer/plate_montages_mqc.html"
+                "plateviewer/plate_montages_mqc.html",
+                "pycytominer",
+                "pycytominer/2021_04_26_Batch1_BR00117035_anno.parquet"
             ]
         ],
-        "timestamp": "2026-07-10T18:05:39.556180217",
+        "timestamp": "2026-11-18T14:46:18.18233276",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "-profile test -stub": {
