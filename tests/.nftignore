@@ -32,7 +32,12 @@ multiqc/multiqc_report.html
 # CYTOTABLE_REPORTS HTML exports embed a random session id (marimo emits a
 # random-id uuid for every UI element), so they are not byte-reproducible
 # between runs. The underlying marimo app (_reports.py), metadata JSON,
-# descriptive-stats parquet and plot PNGs remain content-stable and stay
-# snapshot-hashed.
+# and plot PNGs remain content-stable and stay snapshot-hashed.
 cytotable/reports/*_reports.html
+# The descriptive-stats parquet is computed from the per-cell profile
+# columns and inherits the BLAS-driven float drift of the CYTOTABLE
+# parquets above (GitHub CI runners span x86 CPU generations, so
+# OpenBLAS picks different kernels per run; tracked in #41). The
+# structural QC stats JSON (integer counts) stays snapshot-hashed.
+cytotable/reports/*_descriptive_stats.parquet
 pipeline_info/*.{html,json,txt,yml}
