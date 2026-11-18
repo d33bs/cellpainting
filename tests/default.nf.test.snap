@@ -55,7 +55,6 @@
                 "2021_04_26_Batch1_BR00117035_descriptive_stats.parquet:md5,69060f205b63fae9ec51aca5e215aae8",
                 "2021_04_26_Batch1_BR00117035_dna_intensity.png:md5,e3daa0545fba018053828c9fa7c4e796",
                 "2021_04_26_Batch1_BR00117035_metadata.json:md5,fa050e05e8729648dd4e60d9769592e9",
-                "2021_04_26_Batch1_BR00117035_reports.html:md5,34b92759823fd5f246b8498cf8035232",
                 "2021_04_26_Batch1_BR00117035_reports.py:md5,b9e8c560032899f37cf6131f10c96cca",
                 "2021_04_26_Batch1_BR00117035_size_distributions.png:md5,7440bf54d02fb452137dfe9b9aeaa3b0",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
@@ -318,7 +317,6 @@
                 "2021_04_26_Batch1_BR00117035_descriptive_stats.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_dna_intensity.png:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_metadata.json:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "2021_04_26_Batch1_BR00117035_reports.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_reports.ipynb:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_reports.md:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_reports.py:md5,d41d8cd98f00b204e9800998ecf8427e",
